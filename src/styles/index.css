@@ -1,0 +1,16 @@
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: system-ui;
+    margin: 0;
+    background: #56504e;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
