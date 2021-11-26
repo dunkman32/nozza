@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 import styled from 'styled-components';
-import MainTitle from '@src/components/MainTitle';
+import MainTitle from '@src/components/mainTitle';
+import Second from '@src/components/secondSlide';
+import Third from '@src/components/thirdSlide';
 import Header from '@src/components/header';
 import Image from 'next/image';
 import rocket from '@src/assets/images/rocket.png';
@@ -11,6 +13,8 @@ const MainDiv = styled.div`
   margin: 0 auto;
   height: 100%;
   position: relative;
+  min-height: 100vh;
+  min-width: 100vw;
 `;
 
 export default function App() {
@@ -50,7 +54,7 @@ export default function App() {
             justifyContent: 'center',
           }}
         >
-          <MainTitle />
+          <Second />
         </ParallaxLayer>
         <ParallaxLayer
           offset={2}
@@ -62,7 +66,7 @@ export default function App() {
             justifyContent: 'center',
           }}
         >
-          <MainTitle />
+          <Third />
         </ParallaxLayer>
         <ParallaxLayer
           offset={3}

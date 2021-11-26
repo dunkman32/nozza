@@ -19,6 +19,7 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "import"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/no-use-before-define": ["error"],
