@@ -36,7 +36,9 @@ const ImgWrapper = styled.div`
   }
 `;
 
-const Index = ({ scroll }: any) => (
+const Index = ({ scroll }: {
+  scroll: (_arg0: number) => void
+}) => (
   <Header>
     <Left>
       <ImgWrapper>
