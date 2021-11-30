@@ -1,104 +1,95 @@
-import React, { useRef } from 'react';
-import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
+import React from 'react';
 import styled from 'styled-components';
 import MainTitle from '@src/components/mainTitle';
 import Second from '@src/components/secondSlide';
 import Third from '@src/components/thirdSlide';
 import Header from '@src/components/header';
-import Image from 'next/image';
-import rocket from '@src/assets/images/rocket.png';
+// @ts-ignore
+import { FullPage, Slide } from 'react-full-page';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 
-const MainDiv = styled.div`
-  width: 80% !important;
+const MainPage = styled.div`
   margin: 0 auto;
   height: 100%;
   position: relative;
   min-height: 100vh;
-  min-width: 100vw;
+  `;
+
+const Btns = styled.div`
+  position: fixed;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  top: 45vh;
+  gap: .5rem;
 `;
 
-export default function App() {
-  const parallax = useRef<IParallax>(null!);
+const BtnChecked = styled(RadioButtonCheckedIcon)`
+  color: rgba(108, 130, 191, .75);
+`;
+const BtnUnChecked = styled(RadioButtonUncheckedIcon)`
+  color: rgba(108, 130, 191, 1);
+  cursor: pointer;
+`;
 
-  const scroll = (page: number) => {
-    parallax.current.scrollTo(page);
+const CustomControls = (props: any) => {
+  const renderSlidesNumbers = (currentSlideIndex: number) => {
+    const {
+      slidesCount,
+      scrollToSlide,
+    } = props;
+    return Array(slidesCount)
+      .fill(0)
+      .map((_, i) => {
+        const buttonProps = {
+          disabled: currentSlideIndex === i,
+          key: i,
+          onClick: () => scrollToSlide(i),
+        };
+        return currentSlideIndex !== i ? (
+          <BtnUnChecked
+            type="button"
+            {...buttonProps}
+          />
+        ) : <BtnChecked />;
+      });
   };
 
+  const {
+    getCurrentSlideIndex,
+  } = props;
+  const currentSlideIndex = getCurrentSlideIndex();
   return (
-    <MainDiv>
-      <Parallax
-        ref={parallax}
-        pages={5}
-        className="stars"
+    <Btns>
+      {renderSlidesNumbers(currentSlideIndex)}
+    </Btns>
+  );
+};
+
+export default function App() {
+  return (
+    <MainPage>
+      <Header />
+      <FullPage
+        controls={CustomControls}
+        duration={800}
       >
-        <Header scroll={scroll} />
-        <ParallaxLayer
-          offset={0}
-          speed={0.1}
-          onClick={() => parallax.current.scrollTo(1)}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        <Slide>
           <MainTitle />
-        </ParallaxLayer>
-        <ParallaxLayer
-          offset={1}
-          onClick={() => parallax.current.scrollTo(2)}
-          speed={0.1}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
+        </Slide>
+        <Slide style={{
+          animationTimingFunction: 'cubic-bezier(0.1, -0.6, 0.2, 0)',
+        }}
         >
           <Second />
-        </ParallaxLayer>
-        <ParallaxLayer
-          offset={2}
-          speed={0.1}
-          onClick={() => parallax.current.scrollTo(3)}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+        </Slide>
+        <Slide>
           <Third />
-        </ParallaxLayer>
-        <ParallaxLayer
-          offset={3}
-          onClick={() => parallax.current.scrollTo(4)}
-          speed={0.1}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <MainTitle />
-        </ParallaxLayer>
-        <ParallaxLayer
-          offset={4}
-          onClick={() => parallax.current.scrollTo(0)}
-          speed={0.1}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div style={{
-            position: 'relative',
-            top: 400,
-          }}
-          >
-            <Image src={rocket} width="1500" height="500" />
-          </div>
-        </ParallaxLayer>
-      </Parallax>
-    </MainDiv>
+        </Slide>
+      </FullPage>
+    </MainPage>
   );
 }

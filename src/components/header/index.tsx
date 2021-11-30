@@ -36,7 +36,7 @@ const ImgWrapper = styled.div`
   }
 `;
 
-const Index = ({ scroll }: any) => (
+const Index = () => (
   <Header>
     <Left>
       <ImgWrapper>
@@ -44,10 +44,10 @@ const Index = ({ scroll }: any) => (
       </ImgWrapper>
     </Left>
     <Right>
-      <Nav onClick={() => scroll(2)}>
+      <Nav>
         Nav 1
       </Nav>
-      <Nav onClick={() => scroll(3)}>
+      <Nav>
         Nav 2
       </Nav>
     </Right>

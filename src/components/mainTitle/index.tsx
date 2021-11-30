@@ -4,12 +4,13 @@ import Image from 'next/image';
 import dev from '@src/assets/images/bg2.png';
 
 const HeaderImage = styled.div`
-  align-items: flex-start;
+  align-items: center;
   width: 88%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   z-index: 2;
+  height: 98vh;
 `;
 
 const TitleDiv = styled.div`

@@ -19,6 +19,7 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "import"],
   "rules": {
+    "react/jsx-props-no-spreading": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-shadow": ["error"],
